@@ -1,3 +1,3 @@
-![screenshot](./screenshot.gif)
+![screenshot](./screenshot.png)
 
-Very besic 3D rendering engine.
+Template to test WebGL renderings.
