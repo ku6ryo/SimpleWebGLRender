@@ -6,6 +6,5 @@ uniform mat4 uMvpMatrix;
 varying vec4 pos;
 
 void main() {
-  gl_Position = vec4(aPosition, 1.0);
-  pos = uMvpMatrix * vec4(aPosition, 1.0);
+  gl_Position = uMvpMatrix * vec4(aPosition, 1.0);
 }

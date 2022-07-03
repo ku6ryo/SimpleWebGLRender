@@ -50,7 +50,7 @@ export async function main() {
   )
   const viewMatrix = mat4.lookAt(
     mat4.identity(mat4.create()),
-    [0, 0, -2],
+    [0, 0, -4],
     [0, 0, 0],
     [0, 1, 0]
   )
@@ -61,21 +61,19 @@ export async function main() {
   const modelViewProjectionMatrix = mat4.identity(mat4.create())
   mat4.multiply(modelViewProjectionMatrix, projectionMatrix, viewMatrix)
   mat4.multiply(modelViewProjectionMatrix, modelViewProjectionMatrix, modelMatrix)
-  console.log(modelViewProjectionMatrix)
 
   const program = createProgram(gl, createShader(gl, gl.VERTEX_SHADER, vertexShader), createShader(gl, gl.FRAGMENT_SHADER, fragmentShader))
   const mvpLocation = gl.getUniformLocation(program, "uMvpMatrix")
-  gl.uniformMatrix4fv(mvpLocation, false, modelViewProjectionMatrix)
-
-  const posLoc = gl.getAttribLocation(program, "aPosition")
+  const positionLocation = gl.getAttribLocation(program, "aPosition")
 
   gl.useProgram(program)
+  gl.uniformMatrix4fv(mvpLocation, false, modelViewProjectionMatrix)
 
   const positionBuffer = gl.createBuffer()
   gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer)
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW)
-  gl.vertexAttribPointer(posLoc, 3, gl.FLOAT, false, 0, 0)
-  gl.enableVertexAttribArray(posLoc)
+  gl.vertexAttribPointer(positionLocation, 3, gl.FLOAT, false, 0, 0)
+  gl.enableVertexAttribArray(positionLocation)
   gl.bindBuffer(gl.ARRAY_BUFFER, null)
 
   const indexBuffer = gl.createBuffer()
@@ -87,7 +85,7 @@ export async function main() {
   )
 
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer)
-  gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0)
+  gl.drawElements(gl.LINE_LOOP, indices.length, gl.UNSIGNED_SHORT, 0)
 
   gl.bindBuffer(gl.ARRAY_BUFFER, null)
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null)
