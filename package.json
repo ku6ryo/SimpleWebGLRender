@@ -1,0 +1,15 @@
+{
+  "name": "skin-animation",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "author": "Ryo Kuroyanagi",
+  "license": "MIT",
+  "dependencies": {
+    "gl-matrix": "^3.4.3",
+    "typescript": "^4.5.5",
+    "vite": "^2.8.6"
+  }
+}
