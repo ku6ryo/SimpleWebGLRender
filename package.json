@@ -1,5 +1,5 @@
 {
-  "name": "skin-animation",
+  "name": "simple-webgl-rendering",
   "version": "0.0.1",
   "scripts": {
     "build": "vite build",
