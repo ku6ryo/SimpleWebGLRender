@@ -28,10 +28,10 @@ export async function main() {
     6, 9, 8
   ]
 
-  const width = 400
+  const width = 600
   const height = 400
   const fov = Math.PI / 4
-  const aspect = height / width
+  const aspect = width / height
   const near = 0.1
   const far = 10
 
@@ -76,21 +76,16 @@ export async function main() {
   gl.enableVertexAttribArray(positionLocation)
   gl.bindBuffer(gl.ARRAY_BUFFER, null)
 
-  const indexBuffer = gl.createBuffer()
-  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer)
-  gl.bufferData(
-    gl.ELEMENT_ARRAY_BUFFER,
-    new Uint16Array(indices),
-    gl.STATIC_DRAW
-  )
-
-  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer)
-  gl.drawElements(gl.LINE_LOOP, indices.length, gl.UNSIGNED_SHORT, 0)
-
-  gl.bindBuffer(gl.ARRAY_BUFFER, null)
-  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null)
-
   async function process() {
+    const indexBuffer = gl.createBuffer()
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer)
+    gl.bufferData(
+      gl.ELEMENT_ARRAY_BUFFER,
+      new Uint16Array(indices),
+      gl.STATIC_DRAW
+    )
+    gl.drawElements(gl.LINE_LOOP, indices.length, gl.UNSIGNED_SHORT, 0)
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null)
     requestAnimationFrame(process)
   }
   requestAnimationFrame(process)
